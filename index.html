@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnPai</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1><img src="gl1.png" class="gl" alt="gl 1">OnPai</h1>
+  <div class="canvas-container">
+    <canvas id="canvas"></canvas>
+    <div class="toolbar-right">
+      <h3>Инструменты</h3>
+      <label for="colorPicker">Цвет:</label>
+      <input type="color" id="colorPicker" value="#000000">
+      <label for="brushSize">Размер кисти:</label>
+      <input type="range" id="brushSize" min="1" max="20" value="5">
+      <button class="tool-button" id="freeDraw">Свободное рисование</button>
+      <button class="tool-button" id="drawRectangle">Прямоугольник</button>
+      <button class="tool-button" id="drawCircle">Круг</button>
+      <button class="tool-button" id="drawLine">Линия</button>
+      <button id="stickerButton">Выбрать наклейку</button>
+      <button class="clear-button" id="clearCanvas">Очистить холст</button>
+      <button class="settings-button" id="settingsButton">Настройки</button>
+    </div>
+    </div>
+      <div id="stickerPanel" style="display: none;">
+      <img src="em1.png" class="sticker" alt="Sticker 1">
+      <img src="em2.png" class="sticker" alt="Sticker 2">
+      <img src="em3.png" class="sticker" alt="Sticker 3">
+      <!-- Добавьте больше наклеек по мере необходимости -->
+    </div>
+  <script src="script.js"></script>
+</body>
+</html>

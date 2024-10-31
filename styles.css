@@ -1,0 +1,181 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5; /* Основной цвет фона */
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .canvas-container {
+    padding: 5px;
+  }
+
+  canvas {
+    width: 100%;
+    height: calc(100vh - 150px); /* Высота с учетом отступов */
+  }
+
+  .toolbar-right {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .background-image {
+    width: 100px;
+    height: 75px;
+  }
+}
+
+h1 {
+  margin: 20px 0;
+  font-size: 2rem;
+  color: #F5F5F5;
+}
+
+.canvas-container {
+  display: flex;
+  position: relative;
+  padding: 10px;
+  justify-content: center; /* Центрирование содержимого по горизонтали */
+  width: 100%; /* Занимает всю ширину */
+}
+
+canvas {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.70); /* Белый фон с 10% прозрачностью */
+  cursor: crosshair;
+  position: relative; /* Убираем absolute, чтобы холст мог центрироваться */
+  z-index: 1; /* Устанавливаем холст выше фона */
+}
+
+.toolbar-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Устанавливает панель инструментов выше холста */
+  z-index: 2; /* Панель инструментов выше холста */
+}
+
+label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.tool-button, .clear-button {
+  padding: 5px;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tool-button {
+  background-color: #007bff;
+}
+
+.tool-button:hover {
+  background-color: #0056b3;
+}
+
+.clear-button {
+  background-color: #dc3545;
+}
+
+.clear-button:hover {
+  background-color: #c82333;
+}
+
+.background-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.background-option {
+  margin: 10px;
+}
+
+.background-image {
+  width: 200px;
+  height: 150px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.background-image:hover {
+  transform: scale(1.05);
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#stickerButton {
+  padding: 10px;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #28a745;
+  transition: background-color 0.3s ease;
+}
+
+#stickerButton:hover {
+  background-color: #218838;
+}
+
+#stickerPanel {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.sticker {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.sticker:hover {
+  transform: scale(1.1);
+}
+
+.gl {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.gl:hover {
+  transform: scale(1.1);
+}
