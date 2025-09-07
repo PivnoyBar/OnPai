@@ -1,4 +1,3 @@
-// settings.js
 const backgroundImages = document.querySelectorAll('.background-image');
 const backButton = document.getElementById('backButton');
 
@@ -14,7 +13,6 @@ backButton.addEventListener('click', () => {
   window.location.href = 'index.html';
 });
 
-// Установка фона при загрузке страницы
 window.onload = function() {
   const canvasBackground = localStorage.getItem('canvasBackground');
   if (canvasBackground) {
@@ -23,3 +21,4 @@ window.onload = function() {
     document.body.style.backgroundPosition = 'center';
   }
 }
+
