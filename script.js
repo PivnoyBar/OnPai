@@ -16,12 +16,12 @@ canvas.width = window.innerWidth - 200;
 canvas.height = window.innerHeight - 120;
 
 let painting = false;
-let tool = "freeDraw"; // инструмент по умолчанию
+let tool = "freeDraw";
 let startX, startY;
-let shapes = []; // Массив для хранения фигур
-let currentSticker = null; // Переменная для текущей наклейки
+let shapes = []; 
+let currentSticker = null; 
 
-// Получение координат мыши или касания
+
 function getPos(e) {
   const rect = canvas.getBoundingClientRect();
   const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -32,7 +32,7 @@ function getPos(e) {
   };
 }
 
-// Начало рисования
+
 function startPosition(e) {
   e.preventDefault();
   painting = true;
@@ -46,7 +46,7 @@ function startPosition(e) {
   }
 }
 
-// Остановка рисования
+
 function endPosition(e) {
   if (painting && tool !== "freeDraw" && tool !== "sticker") {
     drawShape(e);
@@ -55,7 +55,6 @@ function endPosition(e) {
   ctx.beginPath();
 }
 
-// Рисование для свободного рисования
 function draw(e) {
   if (!painting || tool !== "freeDraw") return;
 
@@ -70,16 +69,15 @@ function draw(e) {
   ctx.moveTo(pos.x, pos.y);
 }
 
-// Предпросмотр фигуры
 function previewShape(e) {
   if (!painting || tool === "freeDraw") return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawShapes(); // Рисуем все фигуры из массива
-  drawShape(e, true); // Предпросмотр текущей фигуры
+  drawShapes(); 
+  drawShape(e, true); 
 }
 
-// Рисование всех фигур из массива
+
 function drawShapes() {
   shapes.forEach(shape => {
     ctx.strokeStyle = shape.color;
@@ -112,7 +110,7 @@ function drawShape(e, isPreview = false) {
 
   if (isPreview) {
     ctx.save();
-    ctx.globalAlpha = 0.5; // Прозрачность для предпросмотра
+    ctx.globalAlpha = 0.5; 
   }
 
   if (tool === "rectangle") {
@@ -130,7 +128,6 @@ function drawShape(e, isPreview = false) {
   }
 
   if (!isPreview) {
-    // Добавляем фигуру в массив при завершении рисования
     if (tool === "rectangle") {
       shapes.push({ type: "rectangle", x: startX, y: startY, width: width, height: height, color: colorPicker.value, size: brushSize.value });
     } else if (tool === "circle") {
@@ -146,26 +143,24 @@ function drawShape(e, isPreview = false) {
   }
 }
 
-// Добавление наклейки
+
 function addSticker(x, y) {
   shapes.push({
     type: "sticker",
     src: currentSticker.src,
     x: x,
     y: y,
-    width: 100, // Размеры наклейки по умолчанию
+    width: 100, 
     height: 100
   });
   drawShapes();
 }
 
-// Показ/скрытие панели наклеек
 stickerButton.addEventListener('click', () => {
   stickerPanel.style.display = stickerPanel.style.display === 'none' ? 'block' : 'none';
-  tool = "sticker"; // Переключение на режим наклеек
+  tool = "sticker";
 });
 
-// Выбор наклейки
 stickers.forEach(sticker => {
   sticker.addEventListener('click', () => {
     currentSticker = sticker;
@@ -173,19 +168,16 @@ stickers.forEach(sticker => {
   });
 });
 
-// Очистка холста
 clearCanvas.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  shapes = []; // Очищаем массив фигур
+  shapes = []; 
 });
 
-// Выбор инструмента
 freeDraw.addEventListener('click', () => tool = "freeDraw");
 drawRectangle.addEventListener('click', () => tool = "rectangle");
 drawCircle.addEventListener('click', () => tool = "circle");
 drawLine.addEventListener('click', () => tool = "line");
 
-// Обработчики событий для рисования
 canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', endPosition);
 canvas.addEventListener('mousemove', e => {
@@ -193,12 +185,10 @@ canvas.addEventListener('mousemove', e => {
   previewShape(e);
 });
 
-// Обработка кнопки настроек
 settingsButton.addEventListener('click', () => {
   window.location.href = 'settings.html';
 });
 
-// Установка фона при загрузке страницы
 window.onload = function() {
   const canvasBackground = localStorage.getItem('canvasBackground');
   if (canvasBackground) {
@@ -208,23 +198,21 @@ window.onload = function() {
   }
 };
 
-// Изменение размеров холста
 function resizeCanvas() {
   if (window.innerWidth > 768) {
     canvas.width = window.innerWidth - 200;
     canvas.height = window.innerHeight - 120;
   } else {
-    canvas.width = window.innerWidth - 20; // Отступы для мобильного
-    canvas.height = window.innerHeight - 150; // Отступы для панели инструментов
+    canvas.width = window.innerWidth - 20; 
+    canvas.height = window.innerHeight - 150; 
   }
-  drawShapes(); // Перерисовываем сохраненные формы на новом размере холста
+  drawShapes(); 
 }
 
-// Вызываем resizeCanvas при загрузке страницы и изменении размеров окна
+
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
 
-// Блокировка прокрутки
 function disableScroll() {
   document.body.style.overflow = 'hidden';
 }
@@ -233,21 +221,19 @@ function enableScroll() {
   document.body.style.overflow = 'auto';
 }
 
-// Добавляем блокировку при начале рисования
 canvas.addEventListener('touchstart', (e) => {
   disableScroll();
   startPosition(e);
 });
 
-// Снимаем блокировку при завершении рисования
 canvas.addEventListener('touchend', (e) => {
   enableScroll();
   endPosition(e);
 });
 
-// Поддержка рисования на мобильных с блокировкой прокрутки
 canvas.addEventListener('touchmove', (e) => {
   draw(e);
   previewShape(e);
-  e.preventDefault(); // Предотвращаем скроллинг во время рисования
+  e.preventDefault();
 });
+
